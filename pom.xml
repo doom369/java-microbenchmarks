@@ -10,7 +10,7 @@
 
 
     <properties>
-        <jmh-core.version>1.18</jmh-core.version>
+        <jmh-core.version>1.19</jmh-core.version>
         <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     </properties>
 
