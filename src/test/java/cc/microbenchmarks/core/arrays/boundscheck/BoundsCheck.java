@@ -28,7 +28,7 @@ public class BoundsCheck {
     @Benchmark
     public int boundCheck() {
         if (index >= ar.length) {
-           throw new IndexOutOfBoundsException();
+           throw new ArrayIndexOutOfBoundsException();
         }
         return ar[index];
     }
