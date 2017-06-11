@@ -1,3 +1,4 @@
+```
 Benchmark                              (strParams)   Mode  Cnt       Score      Error  Units
 ParseDouble.parseDouble                             thrpt   40     735.459 ±   15.955  ops/s
 ParseDouble.parseDouble                    123.123  thrpt   40   22889.555 ±  334.458  ops/s
@@ -14,3 +15,4 @@ ParseDouble.parseDoubleWithConditions      123.123  thrpt   40   22393.140 ±  3
 ParseDouble.parseDoubleWithConditions          123  thrpt   40   28561.857 ±  436.017  ops/s
 ParseDouble.parseDoubleWithConditions    123.123 F  thrpt   40     713.820 ±   21.120  ops/s
 ParseDouble.parseDoubleWithConditions    p 123.123  thrpt   40  227432.731 ± 1460.840  ops/s
+```
