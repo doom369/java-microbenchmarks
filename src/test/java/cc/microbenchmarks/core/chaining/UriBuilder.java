@@ -11,8 +11,6 @@ public class UriBuilder {
 
     private String host;
 
-    private int port;
-
     private String path;
 
     public UriBuilder() {
@@ -29,10 +27,6 @@ public class UriBuilder {
         return this;
     }
 
-    public UriBuilder setPort(int port) {
-        this.port = port;
-        return this;
-    }
 
     public UriBuilder setPath(String path) {
         this.path = path;
@@ -41,6 +35,6 @@ public class UriBuilder {
 
     @Override
     public String toString() {
-        return schema + "://" + host + ":" + port + path;
+        return schema + "://" + host + path;
     }
 }
