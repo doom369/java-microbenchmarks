@@ -1,4 +1,4 @@
-package cc.microbenchmarks.core.string.stringbuilder_variants;
+package cc.microbenchmarks.core.string.stringbuilder_insert;
 
 import org.openjdk.jmh.annotations.*;
 
