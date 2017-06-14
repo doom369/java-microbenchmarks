@@ -1,15 +1,6 @@
 package cc.microbenchmarks.core.string.stringbuilder1;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
@@ -23,16 +14,19 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Fork(1)
 @State(Scope.Thread)
-@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 1)
+@Measurement(iterations = 5, time = 1)
 public class BuilderVsRegularConcat {
 
-    @Param({"Some Char sequence"})
-    String value;
+    CharSequence value;
 
-    @Param({"Some Char sequence2"})
+    @Param({"Some Another Char sequence2"})
     String line;
 
+    @Setup
+    public void seupt() {
+        value = "Some Char sequence";
+    }
 
     @Benchmark
     public String builder() {
@@ -41,6 +35,12 @@ public class BuilderVsRegularConcat {
                 .append(' ')
                 .append(line);
         return buf.toString();
+    }
+
+    @Benchmark
+    public String naiveWithLocalVariable() {
+        String loc = String.valueOf(value);
+        return loc + ' ' + line;
     }
 
     @Benchmark
@@ -57,6 +57,5 @@ public class BuilderVsRegularConcat {
     public String joiner() {
         return new StringJoiner(" ").add(value).add(line).toString();
     }
-
 
 }
