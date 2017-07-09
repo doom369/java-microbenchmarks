@@ -2,8 +2,8 @@ package cc.microbenchmarks.core.system;
 
 import org.openjdk.jmh.annotations.*;
 
+import java.time.Clock;
 import java.time.Instant;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The Blynk Project.
@@ -13,20 +13,28 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.Throughput)
 @Fork(1)
 @State(Scope.Thread)
-@Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 10, time = 1, batchSize = 1000)
+@Measurement(iterations = 20, time = 1, batchSize = 1000)
 public class SystemCalls {
 
     @Benchmark
-    public long curr() {
+    public long currentTimeMillis() {
         return System.currentTimeMillis();
     }
 
     @Benchmark
-    public long instant() {
-        return Instant.now().toEpochMilli();
+    public long millis() {
+        return Clock.systemUTC().millis();
     }
 
+    @Benchmark
+    public long nanoTime() {
+        return System.nanoTime();
+    }
 
+    @Benchmark
+    public long toEpochMilli() {
+        return Instant.now().toEpochMilli();
+    }
 
 }
