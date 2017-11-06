@@ -11,8 +11,6 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.BenchmarkParams;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * The Blynk Project.
  * Created by Dmitriy Dumanskiy.
@@ -21,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.Throughput)
 @Fork(1)
 @State(Scope.Thread)
-@Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS, batchSize = 1000)
-@Measurement(iterations = 40, time = 1, timeUnit = TimeUnit.SECONDS, batchSize = 1000)
+@Warmup(iterations = 10, time = 1, batchSize = 1000)
+@Measurement(iterations = 20, time = 1, batchSize = 1000)
 public class Casting {
 
     public Object msg;
@@ -36,12 +34,32 @@ public class Casting {
     }
 
     @Benchmark
+    public boolean isInstanceMethod() {
+        return type.isInstance(msg);
+    }
+
+    @Benchmark
+    public boolean isInstanceMethodExplicit() {
+        return String.class.isInstance(msg);
+    }
+
+    @Benchmark
+    public boolean isInstanceRegular() {
+        return msg instanceof String;
+    }
+
+    @Benchmark
     public String castMethod() {
         return type.cast(msg);
     }
 
     @Benchmark
-    public String explicitCasting() {
+    public String castMethodExplicit() {
+        return String.class.cast(msg);
+    }
+
+    @Benchmark
+    public String castRegular() {
         return (String) msg;
     }
 
